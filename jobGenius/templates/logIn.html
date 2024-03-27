@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Login - JobGenius</title>
+    <style>
+        .container {
+            max-width: 400px;
+            height: 500px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        #id_username , #id_password{
+        width: 350px;
+        height: 40px;
+        padding-left: 10px;
+        }
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4 mt-4">Login</h2>
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="{{ form.username.id_for_label }}" class="form-label"><strong>Username :</strong></label><br>
+                {{ form.username }}
+                <div class="mb-3">
+                    <label for="{{ form.password.id_for_label }}" class="form-label"><strong>Password :</strong></label><br>
+                    {{ form.password}}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            {% if form.errors %}
+            <p class="error-message text-center">Please enter correct username or password</p>
+            {% endif %}
+            <p class="text-center mt-2">Don't have an account? <a href="{% url 'signup' %}" class="register-link">Register</a></p>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (if needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-S1Owme3gJCJ1q5UU5Vl5P1kTAMrNKzZr1Q6BqqSRlV1R/GDQGrVrGSPp8g3P1PLw" crossorigin="anonymous"></script>
+</body>
+
+</html>

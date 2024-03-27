@@ -1,0 +1,31 @@
+<!-- jobs.html -->
+{% extends 'base.html' %}
+
+{% block title %}Job Listings - Job Portal{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div id="job-listings">
+            <!-- Job Search Form -->
+            <form method="get" action="{% url 'jobs' %}" class="mb-4">
+                <div class="row">
+                    <div class="col-md-8 mb-2">
+                        <label for="{{ search_form.search_query.id_for_label }}" class="sr-only">Search Jobs :</label>
+                        {{ search_form.search_query }}
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+            {% for job in jobs %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ job.title }}</h2>
+                        <p class="card-text">{{ job.company }} - {{ job.location }}</p>
+                        <p class="card-text">{{ job.description }}</p>
+                        <a href="{% url 'job_details' job_id=job.id %}" class="btn btn-primary my-2">View Job</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
